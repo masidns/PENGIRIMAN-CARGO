@@ -5,11 +5,27 @@ class transaksi_model extends CI_model
         if ($No != null){
         $this->db->where('NoStt', $No['NoStt']);
         $result = $this->db->get('transaksi');
-        return $result->result_array();
+        return $result->db->query("SELECT `transaksi`.*,
+        `pengirim`.*, 
+        `penerima`.*, 
+        `barang`.*,
+      FROM
+        `transaksi`
+        INNER JOIN `pengirim` ON `pengirim`.`idPengirim` = `transaksi`.`idPengirim`
+        INNER JOIN `penerima` ON `penerima`.`idPenerima` = `transaksi`.`idPenerima`
+        INNER JOIN `barang` ON `barang`.`NoDo` = `transaksi`.`NoDo`");
     }
     else{
         $result = $this->db->get('transaksi');
-        return $result->result_array();
+        return $result->db->query("SELECT `transaksi`.*,
+        `pengirim`.*,
+        `penerima`.*,
+        `barang`.`NoDo`
+      FROM
+        `transaksi`
+        INNER JOIN `pengirim` ON `pengirim`.`idPengirim` = `transaksi`.`idPengirim`
+        INNER JOIN `penerima` ON `penerima`.`idPenerima` = `transaksi`.`idPenerima`
+        INNER JOIN `barang` ON `barang`.`NoDo` = `transaksi`.`NoDo`");
      }
     }
 

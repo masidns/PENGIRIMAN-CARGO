@@ -4,7 +4,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div align="center">
-                    <b>DATA PEMBAYARAN</b>
+                    <b>DATA USERS</b>
                 </div>
             </div>
             
@@ -12,7 +12,7 @@
              <!-- table -->
            </div>
             <a style="margin-left: 10px;" id="modal-195230" href="" role="button" class="btn btn-primary"
-                data-target="#modal-container-195230" data-toggle="modal" ng-click = "GetPembayaran()"><i class="glyphicon glyphicon-plus"></i> TAMBAH DONG BANG</a>
+                data-target="#modal-container-195230" data-toggle="modal" ng-click = "GetUsers()"><i class="glyphicon glyphicon-plus"></i> MAU TAMBAH?</a>
             <div class="panel-body">
   
                 <div class="table-responsive">
@@ -20,22 +20,26 @@
                         <tdead>
                             <tr>
                                 <td align="center"><b>No</b></td>
-                                <td align="center"><b>ID PEMBAYARAN</b></td>
-                                <td align="center"><b>NO STT </b></td>
-                                <td align="center"><b>CARA BAYAR</b></td>
-                                <td align="center"><b>VIA</b></td>
+                                <td align="center"><b>ID</b></td>
+                                <td align="center"><b>NAMA PEGAWAI</b></td>
+                                <td align="center"><b>KONTAK</b></td>
+                                <td align="center"><b>EMAIL</b></td>
+                                <td align="center"><b>PASSWORD</b></td>
+                                <td align="center"><b>JABATAN</b></td>
                                 <td align="center" colspan="2"><b>Action</b></td>
                             </tr>
                         </tdead>
                         <tbody>
-                            <tr ng-repeat="item in DatasPembayaran">
+                            <tr ng-repeat="item in DatasUsers">
                                 <td align="center">{{$index+1}}</td>
-                                <td align="center">{{item.idPembayaran}}</td>
-                                <td align="center">{{item.NoStt}}</td>
-                                <td align="center">{{item.Carabayar}}</td>
-                                <td align="center">{{item.via}}</td>
+                                <td align="center">{{item.id}}</td>
+                                <td >{{item.NPG}}</td>
+                                <td >{{item.kontak}}</td>
+                                <td align="center">{{item.email}}</td>
+                                <td >{{item.psw}}</td>
+                                <td align="center">{{item.JB}}</td>
                                 <td align="center"><button class="btn btn-info" id="modal-195230" data-target="#modal-container-195230" data-toggle="modal" ng-click="GetData(item)"><i class="glyphicon glyphicon-edit"></i> Ubah</button></td>
-                                <td align="center"><button class="btn btn-Dark"  ng-click ="Hapus(item)"><i class="glyphicon glyphicon-trash"></i>Hapus</button></td>
+                                <td align="center"><button class="btn btn-Dark"  ng-click ="Hapus(item)"><i class="glyphicon glyphicon-trash"></i> Hapus</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -68,46 +72,58 @@
                                 
                                 <div class="form-group">
   
-                                    <label for="pembayaran">
-                                        ID PEMBAYARAN
+                                    <label for="users">
+                                        Nama Users
                                     </label>
-                                    <input type="text" class="form-control" id="pembayaran" ng-model="input.idPembayaran" />
+                                    <input type="text" class="form-control" id="users" ng-model="input.NPG" />
                                 </div>
                                 <div class="form-group">
   
-                                    <label for="pembayaran">
-                                        NO STT
+                                    <label for="users">
+                                        Kontak
                                     </label>
                                     
-                                    <select class="form-control"
-                                  ng-options="item as item.NoStt for item in DatasTransaksi track by item.NoStt"
-                                  ng-model="SelectedTransaksi"></select>      
+                                    <input type="text" class="form-control" id="users" ng-model="input.kontak" />      
                                 </div>
                                 <div class="form-group">
   
-                                  <label for="pembayaran">
-                                      CARA BAYAR
+                                  <label for="users">
+                                      EMAIL
                                   </label>
                                   
-                                  <input type="text" class="form-control" id="pembayaran" ng-model="input.Carabayar" />      
+                                  <input type="email" class="form-control" id="users" ng-model="input.email" />      
                               </div>
                               <div class="form-group">
   
-                                <label for="pembayaran">
-                                    VIA
+                                <label for="users">
+                                    PASSWORD
                                 </label>
                                 
-                                <input type="text" class="form-control" id="pembayaran" ng-model="input.via" />      
+                                <input type="password" class="form-control" id="users" ng-model="input.psw" />      
                             </div>
-    
+  
+                            <div class="form-group">
+  
+                              <label for="users">
+                                  JABATAN
+                              </label>
+                              
+                              <input type="text" class="form-control" id="users" ng-model="input.JB" />      
+                          </div>
+  
+                          <div class="form-group">
+  
                         </div>
                         <div class="modal-footer">
   
                             <button type="button" class="btn btn-primary" ng-click = "Simpan()">
-                                Save <i class="glyphicon glyphicon-floppy-save"></i></button>
+                                Save 
+                                <i class="glyphicon glyphicon-floppy-save"></i>
+                            </button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                 Close
-                                <i class="glyphicon glyphicon-remove"></i></button>
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </button>
                         </div>
                     </div>
   

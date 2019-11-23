@@ -12,7 +12,7 @@
            <!-- table -->
          </div>
           <a style="margin-left: 10px;" id="modal-195230" href="" role="button" class="btn btn-primary"
-              data-target="#modal-container-195230" data-toggle="modal" ng-click = "GetTransaksi()">TAMBAH DONG BANG</a>
+              data-target="#modal-container-195230" data-toggle="modal" ng-click = "GetTransaksi()"><i class="glyphicon glyphicon-plus"></i> TAMBAH DONG BANG</a>
           <div class="panel-body">
 
               <div class="table-responsive">
@@ -46,8 +46,8 @@
                               <td align="center">{{item.Total}}</td>
                               <td align="center">{{item.NoDo}}</td>
                               <td align="center">{{item.idPenerima}}</td>
-                              <td align="center"><button class="btn btn-info" id="modal-195230" data-target="#modal-container-195230" data-toggle="modal" ng-click="GetData(item)">Ubah</button></td>
-                              <td align="center"><button class="btn btn-Dark"  ng-click ="Hapus(item)">Hapus</button></td>
+                              <td align="center"><button class="btn btn-info" id="modal-195230" data-target="#modal-container-195230" data-toggle="modal" ng-click="GetData(item)"><i class="glyphicon glyphicon-edit"></i> Ubah</button></td>
+                              <td align="center"><button class="btn btn-Dark"  ng-click ="Hapus(item)"><i class="glyphicon glyphicon-trash"></i> Hapus</button></td>
                           </tr>
                       </tbody>
                   </table>
@@ -83,7 +83,9 @@
                                   <label for="transaksi">
                                       ID PENGIRIM
                                   </label>
-                                  <input type="text" class="form-control" id="transaksi" ng-model="input.idPengirim" />
+                                  <select class="form-control"
+                                            ng-options="item as item.Nama_Pengirim for item in DatasPengirim track by item.Nama_Pengirim"
+                                            ng-model="SelectedPengirim"></select>
                               </div>
                               <div class="form-group">
 
@@ -143,7 +145,19 @@
                             NO DO
                         </label>
                         
-                        <input type="text" class="form-control" id="transaksi" ng-model="input.NoDo" />      
+                        <select class="form-control"
+                                  ng-options="item as item.NoDo for item in DatasBarang track by item.NoDo"
+                                  ng-model="SelectedBarang"></select>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="transaksi">
+                            ID PENERIMA
+                        </label>
+                        <select class="form-control"
+                                  ng-options="item as item.Nama_Penerima for item in DatasPenerima track by item.Nama_Penerima"
+                                  ng-model="SelectedPenerima"></select>
                     </div>
                                            
 
@@ -151,10 +165,11 @@
                       <div class="modal-footer">
 
                           <button type="button" class="btn btn-primary" ng-click = "Simpan()">
-                              Save </button>
+                              Save 
+                              <i class="glyphicon glyphicon-floppy-save"></i></button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">
                               Close
-                          </button>
+                              <i class="glyphicon glyphicon-remove"></i></button>
                       </div>
                   </div>
 

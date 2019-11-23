@@ -34,7 +34,20 @@
                 templateUrl:"views/pages/pembayaran.html",
                 controller:"PembayaranController"
             })
-
+            .state("users", {
+                url:"/users",
+                templateUrl:"views/pages/users.html",
+                controller:"UsersController"
+            })
 
     })
+    // .controller("views", function ($scope, $window){
+    //     if ($window.sessionStorage.getItem("email")==undefined || $window.sessionStorage.getItem("email")=="" || $window.sessionStorage.getItem("email")==null ){
+    //     }
+    //     $scope.Logout= function(){
+    //         sessionStorage.clear();
+    //         window.location.href="index.html";
+    //     }
+        
+    // })
 })(window.angular);

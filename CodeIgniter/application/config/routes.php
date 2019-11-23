@@ -81,3 +81,8 @@ $route['pembayaran']['get'] = 'api/pembayaran/getPembayaran';
 $route['pembayaran']['post'] = 'api/pembayaran/insertPembayaran';
 $route['pembayaran']['put'] = 'api/pembayaran/updatePembayaran';
 $route['pembayaran']['delete'] = 'api/pembayaran/deletePembayaran';
+// users
+$route['users']['get'] = 'api/users/getUsers';
+$route['users']['post'] = 'api/users/insertUsers';
+$route['users']['put'] = 'api/users/updateUsers';
+$route['users']['delete'] = 'api/users/deleteUsers';

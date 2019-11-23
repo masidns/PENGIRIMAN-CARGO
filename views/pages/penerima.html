@@ -12,7 +12,7 @@
            <!-- table -->
          </div>
           <a style="margin-left: 10px;" id="modal-195230" href="" role="button" class="btn btn-primary"
-              data-target="#modal-container-195230" data-toggle="modal" ng-click = "GetPengirim()">TAMBAH DONG BANG</a>
+              data-target="#modal-container-195230" data-toggle="modal" ng-click = "GetPengirim()"><i class="glyphicon glyphicon-plus"></i> TAMBAH DONG BANG</a>
           <div class="panel-body">
 
               <div class="table-responsive">
@@ -39,8 +39,8 @@
                               <td align="center">{{item.NoTlpn}}</td>
                               <td >{{item.Status}}</td>
                               <td align="center">{{item.TglTerima}}</td>
-                              <td align="center"><button class="btn btn-info" id="modal-195230" data-target="#modal-container-195230" data-toggle="modal" ng-click="GetData(item)">Ubah</button></td>
-                              <td align="center"><button class="btn btn-Dark"  ng-click ="Hapus(item)">Hapus</button></td>
+                              <td align="center"><button class="btn btn-info" id="modal-195230" data-target="#modal-container-195230" data-toggle="modal" ng-click="GetData(item)"><i class="glyphicon glyphicon-edit"></i> Ubah</button></td>
+                              <td align="center"><button class="btn btn-Dark"  ng-click ="Hapus(item)"><i class="glyphicon glyphicon-trash"></i> Hapus</button></td>
                           </tr>
                       </tbody>
                   </table>
@@ -118,10 +118,10 @@
                       <div class="modal-footer">
 
                           <button type="button" class="btn btn-primary" ng-click = "Simpan()">
-                              Save </button>
+                              Save <i class="glyphicon glyphicon-floppy-save"></i></button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">
                               Close
-                          </button>
+                              <i class="glyphicon glyphicon-remove"></i></button>
                       </div>
                   </div>
 

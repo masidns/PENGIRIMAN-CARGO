@@ -218,8 +218,16 @@
     //controller transaksi
     .controller("TransaksiController", function ($scope, $http) {
         $scope.DatasTransaksi = [];
+        $scope.DatasPengirim = [];
+        $scope.DatasPenerima = [];
+        $scope.DatasBarang = [];
+        $scope.SelectedPengirim = {};
+        $scope.SelectedPenerima = {};
+        $scope.SelectedBarang = {};
         $scope.input = {};
         $scope.status="Simpan";
+
+        // Getpengirim
         $http({
             method: "get",
             url: "http://localhost/Pengiriman/CodeIgniter/transaksi",
@@ -231,7 +239,39 @@
         }, function (error) {
             alert(error.message);
         })
-
+        $http({
+            method: "get",
+            url: "http://localhost/Pengiriman/CodeIgniter/pengirim",
+            header: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (response) {
+            $scope.DatasPengirim = response.data.data;
+        }, function (error) {
+            alert(error.message);
+        })
+        $http({
+            method: "get",
+            url: "http://localhost/Pengiriman/CodeIgniter/penerima",
+            header: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (response) {
+            $scope.DatasPenerima = response.data.data;
+        }, function (error) {
+            alert(error.message);
+        })
+        $http({
+            method: "get",
+            url: "http://localhost/Pengiriman/CodeIgniter/barang",
+            header: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (response) {
+            $scope.DatasBarang = response.data.data;
+        }, function (error) {
+            alert(error.message);
+        })
         $scope.Simpan = function(){
             if ($scope.status=="Simpan"){
                 $http({
@@ -288,6 +328,8 @@
     //controller pembayaran
     .controller("PembayaranController", function ($scope, $http) {
         $scope.DatasPembayaran = [];
+        $scope.DatasTransaksi = [];
+        $scope.SelectedTransaksi = {};
         $scope.input = {};
         $scope.status="Simpan";
         $http({
@@ -301,7 +343,18 @@
         }, function (error) {
             alert(error.message);
         })
-
+        // get Transaksi
+        $http({
+            method: "get",
+            url: "http://localhost/Pengiriman/CodeIgniter/transaksi",
+            header: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (response) {
+            $scope.DatasTransaksi = response.data.data;
+        }, function (error) {
+            alert(error.message);
+        })
 
         $scope.Simpan = function(){
             if ($scope.status=="Simpan"){
@@ -355,4 +408,92 @@
             $scope.status = "deletePembayaran";
         }
     })
+
+    //controller Users
+    .controller("UsersController", function ($scope, $http) {
+        $scope.DatasUsers = [];
+        $scope.input = {};
+        $scope.status="Simpan";
+        $http({
+            method: "get",
+            url: "http://localhost/cargo/CodeIgniter/users",
+            header: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (response) {
+            $scope.DatasUsers = response.data.data;
+        }, function (error) {
+            alert(error.message);
+        })
+
+        $scope.Simpan = function(){
+            if ($scope.status=="Simpan"){
+                $http({
+                    method: "POST",
+                    url: "http://localhost/cargo/CodeIgniter/users",
+                    data: $scope.input,
+                    header: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(function(response){
+                    $scope.DatasUsers.push(angular.copy($scope.input));
+                    alert("Data Berhasil disimpan");
+                }, function(error){
+                    alert("Data gagal disimpan");
+                })
+            }else{
+                $http({
+                    method: "PUT",
+                    url: "http://localhost/cargo/CodeIgniter/users",
+                    data: $scope.input,
+                    header: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(function(response){
+                    alert("Data berhasil diubah");
+                }, function(error){
+                    alert("Data gagal diubah");
+                })
+            }
+        }
+        $scope.Hapus = function(item){
+            $http({
+                method: "DELETE",
+                url: "http://localhost/cargo/CodeIgniter/users?id="+item.id,
+            }).then(function(response){
+                var index = $scope.DatasUsers.indexOf(item);
+                $scope.DatasUsers.splice(index, 1);
+                alert("Data Berhasil Dihapus");
+                $scope.DatasUsers.push($scope.input);
+            }, function(error){
+                alert("Data Gagal Dihapus");
+            })
+        }
+
+        $scope.GetData = function(item){
+            $scope.input = item;
+            $scope.status = "updateUsers";
+        }
+        $scope.GetSimpan = function(item){
+            $scope.status = "deleteUsers";
+        }
+    })
+    // users
+    // .controller("UsersController", function ($scope, $http, $window) {
+    //     $scope.input = {};
+    //     $scope.Login=function () {
+    //     var Url = "http://localhost/Pengiriman/CodeIgniter/users?email="+$scope.input.email + "&psw=" + $scope.input.psw;
+    //     $http({
+    //         method: "get",
+    //         url: Url
+    //     }).then(function (response) {
+    //         alert("Sukses Login");
+    //         $window.sessionStorage.setItem("email", response.data.data.data.email);
+    //         window.location.href = "index.html"
+    //     }, function (error) {
+    //         alert("Gagal Login");
+    //         $window.sessionStorage.setItem("email", response.data.data.data.email);
+    //     })
+    //     }
+    // })
 })(window.angular);
