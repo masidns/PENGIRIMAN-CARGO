@@ -12,7 +12,8 @@
            <!-- table -->
          </div>
           <a style="margin-left: 10px;" id="modal-195230" href="" role="button" class="btn btn-primary"
-              data-target="#modal-container-195230" data-toggle="modal" ng-click = "GetPengirim()"><i class="glyphicon glyphicon-plus"></i> TAMBAH DONG BANG</a>
+              data-target="#modal-container-
+              195230" data-toggle="modal" ng-click = "GetPengirim()"><i class="glyphicon glyphicon-plus"></i> TAMBAH DONG BANG</a>
           <div class="panel-body">
 
               <div class="table-responsive">
@@ -20,10 +21,8 @@
                       <tdead>
                           <tr>
                               <td align="center"><b>No</b></td>
-                              <td align="center"><b>ID PENERIMA</b></td>
                               <td align="center"><b>NAMA PENERIMA</b></td>
                               <td align="center"><b>Alamat</b></td>
-                              <td align="center"><b>NO TELEPON</b></td>
                               <td align="center"><b>NO TELEPON</b></td>
                               <td align="center"><b>STATUS</b></td>
                               <td align="center"><b>TANGGAL DI TERIMA</b></td>
@@ -33,7 +32,6 @@
                       <tbody>
                           <tr ng-repeat="item in DatasPenerima">
                               <td align="center">{{$index+1}}</td>
-                              <td align="center">{{item.idPenerima}}</td>
                               <td >{{item.Nama_Penerima}}</td>
                               <td >{{item.Alamat}}</td>
                               <td align="center">{{item.NoTlpn}}</td>

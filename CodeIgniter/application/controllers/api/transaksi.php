@@ -33,6 +33,7 @@ class transaksi extends API_Controller
             $this->api_return(
                 [
                     'status'=> true,
+                    'data'=>$data
                 ],200
             );
         }else{

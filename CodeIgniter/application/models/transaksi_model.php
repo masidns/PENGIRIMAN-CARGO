@@ -3,35 +3,43 @@ class transaksi_model extends CI_model
 {
     public function Get($No){
         if ($No != null){
-        $this->db->where('NoStt', $No['NoStt']);
+            $nostt = $No['NoStt'];
+        
         $result = $this->db->get('transaksi');
-        return $result->db->query("SELECT `transaksi`.*,
-        `pengirim`.*, 
-        `penerima`.*, 
-        `barang`.*,
-      FROM
-        `transaksi`
-        INNER JOIN `pengirim` ON `pengirim`.`idPengirim` = `transaksi`.`idPengirim`
-        INNER JOIN `penerima` ON `penerima`.`idPenerima` = `transaksi`.`idPenerima`
-        INNER JOIN `barang` ON `barang`.`NoDo` = `transaksi`.`NoDo`");
+        $result = $this->db->query("
+            SELECT `transaksi`.*,
+                `pengirim`.*, 
+                `penerima`.*, 
+                `barang`.*,
+            FROM
+                `transaksi`
+                INNER JOIN `pengirim` ON `pengirim`.`idPengirim` = `transaksi`.`idPengirim`
+                INNER JOIN `penerima` ON `penerima`.`idPenerima` = `transaksi`.`idPenerima`
+                INNER JOIN `barang` ON `barang`.`NoDo` = `transaksi`.`NoDo`
+            WHERE NoStt = '$nostt   '"
+        );
     }
     else{
-        $result = $this->db->get('transaksi');
-        return $result->db->query("SELECT `transaksi`.*,
-        `pengirim`.*,
-        `penerima`.*,
-        `barang`.`NoDo`
-      FROM
-        `transaksi`
-        INNER JOIN `pengirim` ON `pengirim`.`idPengirim` = `transaksi`.`idPengirim`
-        INNER JOIN `penerima` ON `penerima`.`idPenerima` = `transaksi`.`idPenerima`
-        INNER JOIN `barang` ON `barang`.`NoDo` = `transaksi`.`NoDo`");
+        $this->db->get('transaksi');
+        $result =  $this->db->query("
+            SELECT `transaksi`.*,
+            `pengirim`.*,
+            `penerima`.*,
+            `barang`.`NoDo`
+        FROM
+            `transaksi`
+            INNER JOIN `pengirim` ON `pengirim`.`idPengirim` = `transaksi`.`idPengirim`
+            INNER JOIN `penerima` ON `penerima`.`idPenerima` = `transaksi`.`idPenerima`
+            INNER JOIN `barang` ON `barang`.`NoDo` = `transaksi`.`NoDo`"
+        );
+        return $result->result_array();
      }
     }
 
     public function insert($data){
         $result = $this->db->insert('transaksi', $data);
-        return $result;
+        $id = $this->db->insert_id();
+        return $id;
     }
 
     public function update($data){

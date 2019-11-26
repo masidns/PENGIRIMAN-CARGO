@@ -12,7 +12,7 @@
         $scope.status="Simpan";
         $http({
             method: "get",
-            url: "http://localhost/Pengiriman/CodeIgniter/pengirim",
+            url: "http://localhost/cargo/CodeIgniter/pengirim",
             header: {
                 "Content-Type": "application/json"
             }
@@ -26,7 +26,7 @@
             if ($scope.status=="Simpan"){
                 $http({
                     method: "POST",
-                    url: "http://localhost/Pengiriman/CodeIgniter/pengirim",
+                    url: "http://localhost/cargo/CodeIgniter/pengirim",
                     data: $scope.input,
                     header: {
                         "Content-Type": "application/json"
@@ -40,7 +40,7 @@
             }else{
                 $http({
                     method: "PUT",
-                    url: "http://localhost/Pengiriman/CodeIgniter/pengirim",
+                    url: "http://localhost/cargo/CodeIgniter/pengirim",
                     data: $scope.input,
                     header: {
                         "Content-Type": "application/json"
@@ -55,7 +55,7 @@
         $scope.Hapus = function(item){
             $http({
                 method: "DELETE",
-                url: "http://localhost/Pengiriman/CodeIgniter/pengirim?idPengirim="+item.idPengirim,
+                url: "http://localhost/cargo/CodeIgniter/pengirim?idPengirim="+item.idPengirim,
             }).then(function(response){
                 var index = $scope.DatasPengirim.indexOf(item);
                 $scope.DatasPengirim.splice(index, 1);
@@ -82,7 +82,7 @@
         $scope.status="Simpan";
         $http({
             method: "get",
-            url: "http://localhost/Pengiriman/CodeIgniter/penerima",
+            url: "http://localhost/cargo/CodeIgniter/penerima",
             header: {
                 "Content-Type": "application/json"
             }
@@ -96,7 +96,7 @@
             if ($scope.status=="Simpan"){
                 $http({
                     method: "POST",
-                    url: "http://localhost/Pengiriman/CodeIgniter/penerima",
+                    url: "http://localhost/cargo/CodeIgniter/penerima",
                     data: $scope.input,
                     header: {
                         "Content-Type": "application/json"
@@ -110,7 +110,7 @@
             }else{
                 $http({
                     method: "PUT",
-                    url: "http://localhost/Pengiriman/CodeIgniter/penerima",
+                    url: "http://localhost/cargo/CodeIgniter/penerima",
                     data: $scope.input,
                     header: {
                         "Content-Type": "application/json"
@@ -125,7 +125,7 @@
         $scope.Hapus = function(item){
             $http({
                 method: "DELETE",
-                url: "http://localhost/Pengiriman/CodeIgniter/penerima?idPenerima="+item.idPenerima,
+                url: "http://localhost/cargo/CodeIgniter/penerima?idPenerima="+item.idPenerima,
             }).then(function(response){
                 var index = $scope.DatasPenerima.indexOf(item);
                 $scope.DatasPenerima.splice(index, 1);
@@ -152,7 +152,7 @@
         $scope.status="Simpan";
         $http({
             method: "get",
-            url: "http://localhost/Pengiriman/CodeIgniter/barang",
+            url: "http://localhost/cargo/CodeIgniter/barang",
             header: {
                 "Content-Type": "application/json"
             }
@@ -166,7 +166,7 @@
             if ($scope.status=="Simpan"){
                 $http({
                     method: "POST",
-                    url: "http://localhost/Pengiriman/CodeIgniter/barang",
+                    url: "http://localhost/cargo/CodeIgniter/barang",
                     data: $scope.input,
                     header: {
                         "Content-Type": "application/json"
@@ -180,7 +180,7 @@
             }else{
                 $http({
                     method: "PUT",
-                    url: "http://localhost/Pengiriman/CodeIgniter/barang",
+                    url: "http://localhost/cargo/CodeIgniter/barang",
                     data: $scope.input,
                     header: {
                         "Content-Type": "application/json"
@@ -195,7 +195,7 @@
         $scope.Hapus = function(item){
             $http({
                 method: "DELETE",
-                url: "http://localhost/Pengiriman/CodeIgniter/barang?NoDo="+item.NoDo,
+                url: "http://localhost/cargo/CodeIgniter/barang?NoDo="+item.NoDo,
             }).then(function(response){
                 var index = $scope.DatasBarang.indexOf(item);
                 $scope.DatasBarang.splice(index, 1);
@@ -230,7 +230,7 @@
         // Getpengirim
         $http({
             method: "get",
-            url: "http://localhost/Pengiriman/CodeIgniter/transaksi",
+            url: "http://localhost/cargo/CodeIgniter/transaksi",
             header: {
                 "Content-Type": "application/json"
             }
@@ -241,7 +241,7 @@
         })
         $http({
             method: "get",
-            url: "http://localhost/Pengiriman/CodeIgniter/pengirim",
+            url: "http://localhost/cargo/CodeIgniter/pengirim",
             header: {
                 "Content-Type": "application/json"
             }
@@ -252,7 +252,7 @@
         })
         $http({
             method: "get",
-            url: "http://localhost/Pengiriman/CodeIgniter/penerima",
+            url: "http://localhost/cargo/CodeIgniter/penerima",
             header: {
                 "Content-Type": "application/json"
             }
@@ -263,7 +263,7 @@
         })
         $http({
             method: "get",
-            url: "http://localhost/Pengiriman/CodeIgniter/barang",
+            url: "http://localhost/cargo/CodeIgniter/barang",
             header: {
                 "Content-Type": "application/json"
             }
@@ -272,16 +272,40 @@
         }, function (error) {
             alert(error.message);
         })
+        // hitung
+        $scope.hitung =  function(){
+            if($scope.SelectedPengirim != undefined && $scope.input.Tarif != undefined && $scope.SelectedBarang!=undefined){
+                $scope.input.Biaya = $scope.input.Tarif;
+                $scope.input.Total = 0;
+                var PPN = 0;
+                var BiayaPack = 0;
+                var Biayalain = 0;
+                if($scope.input.PPN != undefined && $scope.input.PPN >0){
+                    PPN = (parseInt($scope.input.Biaya) * parseInt($scope.SelectedBarang.Berat))*(parseInt($scope.input.PPN)/100)
+                }
+                if($scope.input.BiayaPack != undefined){
+                    BiayaPack = parseInt($scope.input.BiayaPack);
+                }
+                if($scope.input.Biayalain != undefined){
+                    Biayalain = parseInt($scope.input.Biayalain);
+                }
+                $scope.input.Total = parseInt($scope.input.Biaya) * parseInt($scope.SelectedBarang.Berat)+ PPN +BiayaPack+Biayalain ;
+            }
+        }
         $scope.Simpan = function(){
             if ($scope.status=="Simpan"){
+                $scope.input.idPengirim=$scope.SelectedPengirim.idPengirim;
+                $scope.input.NoDo=$scope.SelectedBarang.NoDo;
+                $scope.input.idPenerima=$scope.SelectedPenerima.idPenerima;
                 $http({
                     method: "POST",
-                    url: "http://localhost/Pengiriman/CodeIgniter/transaksi",
+                    url: "http://localhost/cargo/CodeIgniter/transaksi",
                     data: $scope.input,
                     header: {
                         "Content-Type": "application/json"
                     }
                 }).then(function(response){
+                    $scope.input.NoStt = response.data.data;
                     $scope.DatasTransaksi.push(angular.copy($scope.input));
                     alert("Data Berhasil disimpan");
                 }, function(error){
@@ -289,13 +313,17 @@
                 })
             }else{
                 $http({
+                    // $scope.input.idPengirim=$scope.SelectedPengirim.idPengirim;
+                    // $scope.input.NoDo=$scope.SelectedBarang.NoDo;
+                    // $scope.input.idPenerima=$scope.SelectedPenerima.idPenerima;
                     method: "PUT",
-                    url: "http://localhost/Pengiriman/CodeIgniter/transaksi",
+                    url: "http://localhost/cargo/CodeIgniter/transaksi",
                     data: $scope.input,
                     header: {
                         "Content-Type": "application/json"
                     }
                 }).then(function(response){
+                    // $scope.DatasTransaksi.push(angular.copy($scope.input));
                     alert("Data berhasil diubah");
                 }, function(error){
                     alert("Data gagal diubah");
@@ -305,7 +333,7 @@
         $scope.Hapus = function(item){
             $http({
                 method: "DELETE",
-                url: "http://localhost/Pengiriman/CodeIgniter/transaksi?NoStt="+item.NoStt,
+                url: "http://localhost/cargo/CodeIgniter/transaksi?NoStt="+item.NoStt,
             }).then(function(response){
                 var index = $scope.DatasTransaksi.indexOf(item);
                 $scope.DatasTransaksi.splice(index, 1);
@@ -334,7 +362,7 @@
         $scope.status="Simpan";
         $http({
             method: "get",
-            url: "http://localhost/Pengiriman/CodeIgniter/pembayaran",
+            url: "http://localhost/cargo/CodeIgniter/pembayaran",
             header: {
                 "Content-Type": "application/json"
             }
@@ -346,7 +374,7 @@
         // get Transaksi
         $http({
             method: "get",
-            url: "http://localhost/Pengiriman/CodeIgniter/transaksi",
+            url: "http://localhost/cargo/CodeIgniter/transaksi",
             header: {
                 "Content-Type": "application/json"
             }
@@ -357,16 +385,20 @@
         })
 
         $scope.Simpan = function(){
-            if ($scope.status=="Simpan"){
+            $scope.input = {};
+            // $scope.input.NoStt=$scope.SelectedTransaksi.Nostt;
+            if ($scope.status=="Simpan"){          
+                
+             $scope.input.NoStt=$scope.SelectedTransaksi.NoStt;      
                 $http({
                     method: "POST",
-                    url: "http://localhost/Pengiriman/CodeIgniter/pembayaran",
+                    url: "http://localhost/cargo/CodeIgniter/pembayaran",
                     data: $scope.input,
                     header: {
                         "Content-Type": "application/json"
                     }
                 }).then(function(response){
-                    $scope.DatasPembayaran.push(angular.copy($scope.input));
+                    $scope.DatasPembayaran.push(response.data.status[0]);
                     alert("Data Berhasil disimpan");
                 }, function(error){
                     alert("Data gagal disimpan");
@@ -374,7 +406,7 @@
             }else{
                 $http({
                     method: "PUT",
-                    url: "http://localhost/Pengiriman/CodeIgniter/pembayaran",
+                    url: "http://localhost/cargo/CodeIgniter/pembayaran",
                     data: $scope.input,
                     header: {
                         "Content-Type": "application/json"
@@ -389,7 +421,7 @@
         $scope.Hapus = function(item){
             $http({
                 method: "DELETE",
-                url: "http://localhost/Pengiriman/CodeIgniter/pembayaran?idPembayaran="+item.idPembayaran,
+                url: "http://localhost/cargo/CodeIgniter/pembayaran?idPembayaran="+item.idPembayaran,
             }).then(function(response){
                 var index = $scope.DatasPembayaran.indexOf(item);
                 $scope.DatasPembayaran.splice(index, 1);
@@ -482,7 +514,7 @@
     // .controller("UsersController", function ($scope, $http, $window) {
     //     $scope.input = {};
     //     $scope.Login=function () {
-    //     var Url = "http://localhost/Pengiriman/CodeIgniter/users?email="+$scope.input.email + "&psw=" + $scope.input.psw;
+    //     var Url = "http://localhost/cargo/CodeIgniter/users?email="+$scope.input.email + "&psw=" + $scope.input.psw;
     //     $http({
     //         method: "get",
     //         url: Url

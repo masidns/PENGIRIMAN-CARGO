@@ -3,21 +3,26 @@ class pembayaran_model extends CI_model
 {
     public function Get($id){
         if ($id != null){
-        $this->db->where('idPembayaran', $id['idPembayaran']);
-        $result = $this->db->get('pembayaran');
-        return $result->db->query("SELECT `pembayaran`.*,
-        `transaksi`.*,
+        $id=  $id['idPembayaran'];
+        $result = $this->db->query("
+        SELECT
+        *
       FROM
         `transaksi`
-        INNER JOIN `pembayaran` ON `transaksi`.`NoStt` = `pembayaran`.`NoStt`");
+        LEFT JOIN `pembayaran` ON `transaksi`.`NoStt` = `pembayaran`.`NoStt`
+            WHERE idPembayaran = '$id'"
+        );
+        return $result->result_array();
     }
     else{
-        $result = $this->db->get('pembayaran');
-        return $result->db->query("SELECT `pembayaran`.*,
-        `transaksi`.*,
+        $result = $this->db->query("
+        SELECT
+        *
       FROM
         `transaksi`
-        INNER JOIN `pembayaran` ON `transaksi`.`NoStt` = `pembayaran`.`NoStt`");
+        LEFT JOIN `pembayaran` ON `transaksi`.`NoStt` = `pembayaran`.`NoStt`"
+        );
+        return $result->result_array();
      }
     }
 
