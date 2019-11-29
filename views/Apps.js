@@ -41,13 +41,13 @@
             })
 
     })
-    // .controller("views", function ($scope, $window){
-    //     if ($window.sessionStorage.getItem("email")==undefined || $window.sessionStorage.getItem("email")=="" || $window.sessionStorage.getItem("email")==null ){
-    //     }
-    //     $scope.Logout= function(){
-    //         sessionStorage.clear();
-    //         window.location.href="index.html";
-    //     }
-        
-    // })
+    .controller("views", function ($scope, $window){
+        if ($window.sessionStorage.getItem("username")==undefined || $window.sessionStorage.getItem("username")=="" || $window.sessionStorage.getItem("username")==null ){
+            window.location.href="login.html";
+        }
+        $scope.Logout= function(){
+            sessionStorage.clear();
+            window.location.href="index.html";
+        }
+    })
 })(window.angular);

@@ -311,44 +311,71 @@
                 }, function(error){
                     alert("Data gagal disimpan");
                 })
-            }else{
+            } else {
+                $scope.input.idPengirim = $scope.SelectedPengirim.idPengirim;
+                $scope.input.NoDo = $scope.SelectedBarang.NoDo;
+                $scope.input.idPenerima = $scope.SelectedPenerima.idPenerima;
+                var Data= {};
+                Data.NoStt = $scope.input.NoStt;
+                Data.idPengirim = $scope.input.idPengirim;
+                Data.Tarif = $scope.input.Tarif;
+                Data.Biaya = $scope.input.Biaya;
+                Data.BiayaPack = $scope.input.BiayaPack;
+                Data.Biayalain = $scope.input.Biayalain;
+                Data.PPN = $scope.input.PPN;
+                Data.Total = $scope.input.Total;
+                Data.NoDo = $scope.input.NoDo;
+                Data.idPenerima = $scope.input.idPenerima;
+                
                 $http({
-                    // $scope.input.idPengirim=$scope.SelectedPengirim.idPengirim;
-                    // $scope.input.NoDo=$scope.SelectedBarang.NoDo;
-                    // $scope.input.idPenerima=$scope.SelectedPenerima.idPenerima;
                     method: "PUT",
                     url: "http://localhost/cargo/CodeIgniter/transaksi",
-                    data: $scope.input,
+                    data: Data,
                     header: {
                         "Content-Type": "application/json"
                     }
-                }).then(function(response){
+                }).then(function (response) {
                     // $scope.DatasTransaksi.push(angular.copy($scope.input));
                     alert("Data berhasil diubah");
-                }, function(error){
+                }, function (error) {
                     alert("Data gagal diubah");
                 })
             }
         }
-        $scope.Hapus = function(item){
+        $scope.Hapus = function (item) {
             $http({
                 method: "DELETE",
-                url: "http://localhost/cargo/CodeIgniter/transaksi?NoStt="+item.NoStt,
-            }).then(function(response){
+                url: "http://localhost/cargo/CodeIgniter/transaksi?NoStt=" + item.NoStt,
+            }).then(function (response) {
                 var index = $scope.DatasTransaksi.indexOf(item);
                 $scope.DatasTransaksi.splice(index, 1);
                 alert("Data Berhasil Dihapus");
                 $scope.DatasTransaksi.push($scope.input);
-            }, function(error){
+            }, function (error) {
                 alert("Data Gagal Dihapus");
             })
         }
 
-        $scope.GetData = function(item){
+        $scope.GetData = function (item) {
+            angular.forEach($scope.DatasBarang, function (valueBarang, KeyBarang) {
+                if (valueBarang.NoDo == $scope.input.NoDo) {
+                    $scope.SelectedBarang = valueBarang;
+                }
+            })
+            angular.forEach($scope.DatasPengirim, function (valuePengirim, KeyPengirim) {
+                if (valuePengirim.idPengirim == $scope.input.idPengirim) {
+                    $scope.SelectedPengirim = valuePengirim;
+                }
+            })
+            angular.forEach($scope.DatasPenerima, function (valuePenerima, keyPenerima) {
+                if (valuePenerima.idPenerima == $scope.input.idPenerima) {
+                    $scope.SelectedPenerima = valuePenerima;
+                }
+            })
             $scope.input = item;
             $scope.status = "updateTransaksi";
         }
-        $scope.GetSimpan = function(item){
+        $scope.GetSimpan = function (item) {
             $scope.status = "deleteTransaksi";
         }
     })
@@ -441,91 +468,26 @@
         }
     })
 
-    //controller Users
-    .controller("UsersController", function ($scope, $http) {
-        $scope.DatasUsers = [];
+    // Users
+    .controller("UsersController", function ($scope, $http, $window) {
         $scope.input = {};
-        $scope.status="Simpan";
+        $scope.Login=function () {
+        var Url = "http://localhost/cargo/CodeIgniter/users?username="+$scope.input.username + "&psw=" + $scope.input.psw;
+        
         $http({
             method: "get",
-            url: "http://localhost/cargo/CodeIgniter/users",
-            header: {
-                "Content-Type": "application/json"
-            }
+            url: Url
         }).then(function (response) {
-            $scope.DatasUsers = response.data.data;
+            alert("Sukses login");
+          
+            $window.sessionStorage.setItem("username", $scope.input.username);
+            $window.location.href = "index.html"
         }, function (error) {
-            alert(error.message);
-        })
+            alert("Gagal Login");
+           
+            $window.sessionStorage.setItem("username", response.data.data.data.username);
 
-        $scope.Simpan = function(){
-            if ($scope.status=="Simpan"){
-                $http({
-                    method: "POST",
-                    url: "http://localhost/cargo/CodeIgniter/users",
-                    data: $scope.input,
-                    header: {
-                        "Content-Type": "application/json"
-                    }
-                }).then(function(response){
-                    $scope.DatasUsers.push(angular.copy($scope.input));
-                    alert("Data Berhasil disimpan");
-                }, function(error){
-                    alert("Data gagal disimpan");
-                })
-            }else{
-                $http({
-                    method: "PUT",
-                    url: "http://localhost/cargo/CodeIgniter/users",
-                    data: $scope.input,
-                    header: {
-                        "Content-Type": "application/json"
-                    }
-                }).then(function(response){
-                    alert("Data berhasil diubah");
-                }, function(error){
-                    alert("Data gagal diubah");
-                })
-            }
-        }
-        $scope.Hapus = function(item){
-            $http({
-                method: "DELETE",
-                url: "http://localhost/cargo/CodeIgniter/users?id="+item.id,
-            }).then(function(response){
-                var index = $scope.DatasUsers.indexOf(item);
-                $scope.DatasUsers.splice(index, 1);
-                alert("Data Berhasil Dihapus");
-                $scope.DatasUsers.push($scope.input);
-            }, function(error){
-                alert("Data Gagal Dihapus");
-            })
-        }
-
-        $scope.GetData = function(item){
-            $scope.input = item;
-            $scope.status = "updateUsers";
-        }
-        $scope.GetSimpan = function(item){
-            $scope.status = "deleteUsers";
-        }
+        })      
+     }
     })
-    // users
-    // .controller("UsersController", function ($scope, $http, $window) {
-    //     $scope.input = {};
-    //     $scope.Login=function () {
-    //     var Url = "http://localhost/cargo/CodeIgniter/users?email="+$scope.input.email + "&psw=" + $scope.input.psw;
-    //     $http({
-    //         method: "get",
-    //         url: Url
-    //     }).then(function (response) {
-    //         alert("Sukses Login");
-    //         $window.sessionStorage.setItem("email", response.data.data.data.email);
-    //         window.location.href = "index.html"
-    //     }, function (error) {
-    //         alert("Gagal Login");
-    //         $window.sessionStorage.setItem("email", response.data.data.data.email);
-    //     })
-    //     }
-    // })
 })(window.angular);
