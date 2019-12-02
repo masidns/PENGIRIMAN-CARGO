@@ -9,7 +9,7 @@ class pembayaran_model extends CI_model
         *
       FROM
         `transaksi`
-        LEFT JOIN `pembayaran` ON `transaksi`.`NoStt` = `pembayaran`.`NoStt`
+        RIGHT JOIN `pembayaran` ON `transaksi`.`NoStt` = `pembayaran`.`NoStt`
             WHERE idPembayaran = '$id'"
         );
         return $result->result_array();
@@ -20,7 +20,7 @@ class pembayaran_model extends CI_model
         *
       FROM
         `transaksi`
-        LEFT JOIN `pembayaran` ON `transaksi`.`NoStt` = `pembayaran`.`NoStt`"
+        RIGHT JOIN `pembayaran` ON `transaksi`.`NoStt` = `pembayaran`.`NoStt`"
         );
         return $result->result_array();
      }

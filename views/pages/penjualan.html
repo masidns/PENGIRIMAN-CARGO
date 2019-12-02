@@ -1,41 +1,48 @@
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-12">
-        <!--   Kitchen Sink -->
+        <--   Kitchen Sink -->
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div align="center">
-                    <b>DATA PENERIMA</b>
+                    <b>DATA PENJUALAN</b>
                 </div>
-            </div>
-            
-            
+            </div>            
+        </div>
              <!-- table -->
-           </div>
+           <!-- </div>
             <a style="margin-left: 10px;" id="modal-195230" href="" role="button" class="btn btn-primary"
                 data-target="#modal-container-195230" data-toggle="modal" ng-click = "GetPengirim()"><i class="glyphicon glyphicon-plus"></i> TAMBAH DONG BANG</a>
-            <div class="panel-body">
+            <div class="panel-body"> -->
   
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
                         <tdead>
                             <tr>
                                 <td align="center"><b>No</b></td>
+                                <td align="center"><b>No STT</b></td>
+                                <td align="center"><b>NAMA PENGIRIM</b></td>
                                 <td align="center"><b>NAMA PENERIMA</b></td>
-                                <td align="center"><b>Alamat</b></td>
-                                <td align="center"><b>NO TELEPON</b></td>
-                                <td align="center"><b>STATUS</b></td>
-                                <td align="center"><b>TANGGAL DI TERIMA</b></td>
+                                <td align="center"><b>BIAYA</b></td>
+                                <td align="center"><b>BERAT</b></td>
+                                <td align="center"><b>BIAYA PACK</b></td>                                
+                                <td align="center"><b>PPN</b></td>
+                                <td align="center"><b>BIAYA LAIN</b></td>
+                                <td align="center"><b>TOTAL</b></td>  
                                 <td align="center" colspan="2"><b>Action</b></td>
                             </tr>
                         </tdead>
                         <tbody>
-                            <tr ng-repeat="item in DatasPenerima">
+                            <tr ng-repeat= "item in DatasTransaksi">
                                 <td align="center">{{$index+1}}</td>
+                                <td >{{item.NoStt}}</td>
+                                <td >{{item.Nama_Pengirim}}</td>
                                 <td >{{item.Nama_Penerima}}</td>
-                                <td >{{item.Alamat}}</td>
-                                <td align="center">{{item.NoTlpn}}</td>
-                                <td >{{item.Status}}</td>
-                                <td align="center">{{item.TglTerima}}</td>
+                                <td >{{item.Biaya}}</td>
+                                <td align="center">{{item.Berat}}</td>
+                                <td >{{item.BiayaPack}}</td>
+                                <td align="center">{{item.PPN}}</td>
+                                <td >{{item.Biayalain}}</td>
+                                <td >{{item.Total}}</td>
                                 <td align="center"><button class="btn btn-info" id="modal-195230" data-target="#modal-container-195230" data-toggle="modal" ng-click="GetData(item)"><i class="glyphicon glyphicon-edit"></i> Ubah</button></td>
                                 <td align="center"><button class="btn btn-Dark"  ng-click ="Hapus(item)"><i class="glyphicon glyphicon-trash"></i> Hapus</button></td>
                             </tr>
@@ -47,7 +54,7 @@
         <!-- End  Kitchen Sink -->
     </div>
   </div>
-  <div class="container-fluid">
+  <!-- <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
   
@@ -128,4 +135,4 @@
   
         </div>
     </div>
-  </div>
+  </div> -->

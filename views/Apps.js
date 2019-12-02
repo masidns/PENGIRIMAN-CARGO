@@ -34,6 +34,11 @@
                 templateUrl:"views/pages/pembayaran.html",
                 controller:"PembayaranController"
             })
+            .state("penjualan", {
+                url:"/Penjualan",
+                templateUrl:"views/pages/penjualan.html",
+                controller:"PenjualanController"
+            })
             .state("users", {
                 url:"/users",
                 templateUrl:"views/pages/users.html",

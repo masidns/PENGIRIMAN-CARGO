@@ -227,7 +227,7 @@
         $scope.input = {};
         $scope.status="Simpan";
 
-        // Getpengirim
+        // Get Transaksi
         $http({
             method: "get",
             url: "http://localhost/cargo/CodeIgniter/transaksi",
@@ -239,6 +239,7 @@
         }, function (error) {
             alert(error.message);
         })
+        // Get PENGIRIM
         $http({
             method: "get",
             url: "http://localhost/cargo/CodeIgniter/pengirim",
@@ -250,6 +251,7 @@
         }, function (error) {
             alert(error.message);
         })
+        // Get PENERIMA
         $http({
             method: "get",
             url: "http://localhost/cargo/CodeIgniter/penerima",
@@ -261,6 +263,7 @@
         }, function (error) {
             alert(error.message);
         })
+        // Get BARANG
         $http({
             method: "get",
             url: "http://localhost/cargo/CodeIgniter/barang",
@@ -412,7 +415,7 @@
         })
 
         $scope.Simpan = function(){
-            $scope.input = {};
+            
             // $scope.input.NoStt=$scope.SelectedTransaksi.Nostt;
             if ($scope.status=="Simpan"){          
                 
@@ -431,10 +434,16 @@
                     alert("Data gagal disimpan");
                 })
             }else{
+                $scope.input.NoStt=$scope.SelectedTransaksi.NoStt;
+                var Data= {};
+                Data.NoStt = $scope.input.NoStt;
+                Data.idPembayaran = $scope.input.idPembayaran;
+                Data.Carabayar = $scope.input.Carabayar;
+                Data.via = $scope.input.via;
                 $http({
                     method: "PUT",
                     url: "http://localhost/cargo/CodeIgniter/pembayaran",
-                    data: $scope.input,
+                    data: Data,
                     header: {
                         "Content-Type": "application/json"
                     }
@@ -461,12 +470,41 @@
 
         $scope.GetData = function(item){
             $scope.input = item;
+            angular.forEach($scope.DatasTransaksi, function(value, key){
+                if(value.NoStt==item.NoStt){
+                    $scope.SelectedTransaksi=value;
+                }
+            })
             $scope.status = "updatePembayaran";
         }
         $scope.GetSimpan = function(item){
-            $scope.status = "deletePembayaran";
+            $scope.status = "Simpan";
+            $scope.input = {};
         }
     })
+
+
+    //controller Penjualan
+    // .controller("PenjualanController", function ($scope, $http) {
+        
+    //     $scope.DatasPengirim = [];
+    //     $scope.DatasPenerima = [];
+    //     $scope.DatasBarang = [];
+    //     $scope.DatasTransaksi = [];
+    //     $scope.input = {};
+    //     $scope.status="Simpan";
+
+    //     $http({
+    //         method: "get",
+    //         url: "http://localhost/cargo/CodeIgniter/pengirim",
+    //         header: {
+    //             "Content-Type": "application/json"
+    //         }
+    //     }).then(function (response) {
+    //         $scope.DatasPengirim = response.data.data;
+    //     }, function (error) {
+    //         alert(error.message);
+    //     })
 
     // Users
     .controller("UsersController", function ($scope, $http, $window) {
@@ -490,4 +528,78 @@
         })      
      }
     })
+
+            .controller("PenjualanController", function ($scope, $http) {
+            $scope.DatasPenjualan=[];
+            $scope.DatasPengirim = [];
+            $scope.DatasPenerima = [];
+            $scope.DatasBarang = [];
+            $scope.DatasTransaksi = [];
+            $scope.input = {};
+            $scope.status="Simpan";
+                
+            
+            // $http({
+            //     method: "get",
+            //     url: "http://localhost/cargo/CodeIgniter/penjualan",
+            //     header: {
+            //         "Content-Type": "application/json"
+            //     }
+            // }).then(function (response) {
+            //     $scope.DatasPenjualan = response.data.data;
+            // }, function (error) {
+            //     alert(error.message);
+            // })
+            
+            $http({
+                method: "get",
+                url: "http://localhost/cargo/CodeIgniter/pengirim",
+                header: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function (response) {
+                $scope.DatasPengirim = response.data.data;
+            }, function (error) {
+                alert(error.message);
+            })
+    
+            $http({
+                method: "get",
+                url: "http://localhost/cargo/CodeIgniter/penerima",
+                header: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function (response) {
+                $scope.DatasPenerima = response.data.data;
+            }, function (error) {
+                alert(error.message);
+            })
+    
+            $http({
+                method: "get",
+                url: "http://localhost/cargo/CodeIgniter/barang",
+                header: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function (response) {
+                $scope.DatasBarang = response.data.data;
+            }, function (error) {
+                alert(error.message);
+            })
+    
+            $http({
+                method: "get",
+                url: "http://localhost/cargo/CodeIgniter/transaksi",
+                header: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function (response) {
+                $scope.DatasTransaksi = response.data.data;
+            }, function (error) {
+                alert(error.message);
+            })
+        })
+    
+
+
 })(window.angular);

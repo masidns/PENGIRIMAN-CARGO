@@ -18,9 +18,10 @@
 	<script src="angularjs/node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
 	<script src="views/Apps.js"></script>
 	<script src="views/Controller.js"></script>
+	<!-- <script src="views/ControllerPenjualan.js"></script> -->
 	<link href="assets/vendors/form-helpers/css/bootstrap-formhelpers.min.css" rel="stylesheet">
-    <link href="assets/vendors/select/bootstrap-select.min.css" rel="stylesheet">
-    <link href="assets/vendors/tags/css/bootstrap-tags.css" rel="stylesheet">
+	<link href="assets/vendors/select/bootstrap-select.min.css" rel="stylesheet">
+	<link href="assets/vendors/tags/css/bootstrap-tags.css" rel="stylesheet">
 	<link rel="shortcut icon" href="assets/images/b.ico">
 
 
@@ -111,30 +112,39 @@
 								Pembayaran</a>
 						</li>
 						<li><a ui-sref="users" ui-opts="{reload:true}">
-							<i class="glyphicon glyphicon-user"></i>
-							Users</a>
+								<i class="glyphicon glyphicon-user"></i>
+								Users</a>
 						</li>
+						
+						<li><a ui-sref="penjualan" ui-opts="{reload:true}">
+							<i class="glyphicon glyphicon-list"></i>
+							Penjualan</a>
+
 						<li class="submenu">
-								<a href="#">
-								   <i class="glyphicon glyphicon-list"></i> Transaksi
-								   <span class="caret pull-right"></span>
-								</a>
-								<!-- Sub menu -->
-								<ul>
-								   <li><a href="login.html">Login</a></li>
-								   <li><a href="signup.html">Signup</a></li>
-							   </ul>
-						   </li>
+							<a href="#">
+								<i class="glyphicon glyphicon-list"></i> Transaksi
+								<span class="caret pull-right"></span>
+							</a>
+							<!-- Sub menu -->
+							<ul>
+								<!-- <li><a ui-sref="penjualan" ui-opts="{reload:true}">
+										<i class="glyphicon glyphicon-list"></i>
+										Penjualan</a> -->
+								<li><a ui-sref="TotalPenjualan" ui-opts="{reload:true}">
+										<i class="glyphicon glyphicon-list"></i>
+										Total Penjualan</a>
+							</ul>
+						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-md-10">
 				<div class="row">
 					<div class="col-md-12">
-							
+
 						<div class="content-box-large">
-								<ui-view>
-							<!-- <div class="row">
+							<ui-view>
+								<!-- <div class="row">
 								<div class="col-md-12 panel-warning">
 									<div class="content-box-large box-with-header">
 										<ui-view>
@@ -143,7 +153,7 @@
 									</div>
 								</div>
 							</div> -->
-						</ui-view>
+							</ui-view>
 						</div>
 					</div>
 				</div>
@@ -164,29 +174,29 @@
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="js1/jquery.js"></script>
 	<!-- jQuery UI -->
-    <script src="js1/jquery-ui.js"></script>
+	<script src="js1/jquery-ui.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
-    <script src="assets/vendors/form-helpers/js/bootstrap-formhelpers.min.js"></script>
+	<script src="assets/vendors/form-helpers/js/bootstrap-formhelpers.min.js"></script>
 
-    <script src="assets/vendors/select/bootstrap-select.min.js"></script>
+	<script src="assets/vendors/select/bootstrap-select.min.js"></script>
 
-    <script src="assets/vendors/tags/js/bootstrap-tags.min.js"></script>
+	<script src="assets/vendors/tags/js/bootstrap-tags.min.js"></script>
 
-    <script src="assets/vendors/mask/jquery.maskedinput.min.js"></script>
+	<script src="assets/vendors/mask/jquery.maskedinput.min.js"></script>
 
-    <script src="assets/vendors/moment/moment.min.js"></script>
+	<script src="assets/vendors/moment/moment.min.js"></script>
 
-    <script src="assets/vendors/wizard/jquery.bootstrap.wizard.min.js"></script>
-<!-- bootstrap-datetimepicker -->
-<link href="assets/vendors/bootstrap-datetimepicker/datetimepicker.css" rel="stylesheet">
-<script src="assets/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script> 
+	<script src="assets/vendors/wizard/jquery.bootstrap.wizard.min.js"></script>
+	<!-- bootstrap-datetimepicker -->
+	<link href="assets/vendors/bootstrap-datetimepicker/datetimepicker.css" rel="stylesheet">
+	<script src="assets/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 	<link rel="stylesheet" href="js1/bootstrap-editable.css">
 	<script src="js1/bootstrap-editable.min.js"></script>
-	
+
 	<script src="assets/js/custom.js"></script>
-    <script src="assets/js/forms.js"></script>
+	<script src="assets/js/forms.js"></script>
 </body>
 
 </html>
